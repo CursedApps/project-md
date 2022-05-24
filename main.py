@@ -25,5 +25,11 @@ if __name__ == '__main__' :
     repos = g.get_user(args.user).get_repos() if args.user else g.get_organization(args.org).get_repos()
 
     for repo in repos:
-        print(repo)
-        print(repo.url)
+        print(repo.name, repo.url)
+        releases = repo.get_releases()
+        for release in releases:
+            print(release.tag_name)
+            assets = release.get_assets()
+            for asset in assets :
+                print(asset.name, asset.url)
+
